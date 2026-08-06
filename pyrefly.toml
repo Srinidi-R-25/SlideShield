@@ -1,0 +1,12 @@
+[project]
+# Pyrefly configuration for SlideShield project
+# https://github.com/facebook/pyrefly
+
+[python]
+# Add the workspace root to search paths so 'backend' package resolves correctly
+search_path = ["."]
+
+[errors]
+# Suppress missing-module errors for optional third-party packages
+# that are resolved at runtime inside try/except blocks
+ignore = []

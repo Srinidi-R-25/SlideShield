@@ -1,0 +1,17 @@
+{
+  "pythonVersion": "3.12",
+  "pythonPlatform": "Windows",
+  "pythonPath": "C:\\Users\\LENOVO SLIM 3 008\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "extraPaths": [
+    "."
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    ".next",
+    "frontend"
+  ],
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none",
+  "typeCheckingMode": "off"
+}
