@@ -12,21 +12,23 @@ from backend.schemas import TokenData
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
 
+import bcrypt
+
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     try:
-        from passlib.context import CryptContext
-        pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-        return pwd_context.verify(plain_password, hashed_password)
-    except Exception:
-        # Fallback to SHA256 hashing if bcrypt native library issue occurs
+        if hashed_password.startswith("$2b$") or hashed_password.startswith("$2a$") or hashed_password.startswith("$2y$"):
+            return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+        # Fallback to SHA256 hashing check
         salted = f"slideshield-{plain_password}-salt"
         return hashlib.sha256(salted.encode()).hexdigest() == hashed_password
+    except Exception:
+        return False
 
 def get_password_hash(password: str) -> str:
     try:
-        from passlib.context import CryptContext
-        pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-        return pwd_context.hash(password)
+        pwd_bytes = password.encode('utf-8')
+        salt = bcrypt.gensalt()
+        return bcrypt.hashpw(pwd_bytes, salt).decode('utf-8')
     except Exception:
         salted = f"slideshield-{password}-salt"
         return hashlib.sha256(salted.encode()).hexdigest()

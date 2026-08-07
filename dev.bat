@@ -4,5 +4,5 @@ echo [Backend] http://127.0.0.1:8000
 echo [Frontend] http://localhost:3000
 echo.
 
-start "SlideShield Backend" "C:\Users\LENOVO SLIM 3 008\AppData\Local\Programs\Python\Python314\python.exe" -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+start "SlideShield Backend" python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 cd frontend && npm run dev

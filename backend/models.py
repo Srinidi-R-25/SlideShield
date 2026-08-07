@@ -1,4 +1,5 @@
 import datetime
+from typing import ClassVar, Optional
 from sqlalchemy import Column, Integer, String, Text, Float, Boolean, DateTime, ForeignKey, Enum as SQLEnum
 from sqlalchemy.orm import relationship
 from backend.database import Base
@@ -78,6 +79,7 @@ class HazardReport(Base):
     updated_at = Column(DateTime(timezone=True), default=get_utc_now, onupdate=get_utc_now)
 
     reporter = relationship("User", back_populates="hazard_reports")
+    reporter_name: ClassVar[Optional[str]] = None
 
 class Alert(Base):
     __tablename__ = "alerts"
@@ -127,6 +129,8 @@ class SOSRequest(Base):
     resolved_at = Column(DateTime(timezone=True), nullable=True)
 
     user = relationship("User", back_populates="sos_requests")
+    user_name: ClassVar[Optional[str]] = None
+    user_phone: ClassVar[Optional[str]] = None
 
 class Shelter(Base):
     __tablename__ = "shelters"

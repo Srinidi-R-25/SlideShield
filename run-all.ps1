@@ -1,7 +1,7 @@
 # SlideShield Single Terminal Launcher
-# Starts both FastAPI Backend (Python 3.14) and Next.js Frontend together in PowerShell
+# Starts both FastAPI Backend and Next.js Frontend together in PowerShell
 
-$PythonPath = "C:\Users\LENOVO SLIM 3 008\AppData\Local\Programs\Python\Python314\python.exe"
+$PythonPath = "python"
 
 Write-Host "🚀 Starting SlideShield Full-Stack Application..." -ForegroundColor Green
 Write-Host "1. Launching Backend on http://127.0.0.1:8000" -ForegroundColor Cyan
