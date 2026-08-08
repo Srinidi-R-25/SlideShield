@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Shield, Sparkles, Mail, Lock, User, Phone, MapPin, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { UserRole } from '../../lib/types';
+import { fetchApi } from '../../lib/api';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -33,15 +34,10 @@ export default function RegisterPage() {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/auth/register', {
+      await fetchApi('/auth/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
       });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.detail || 'Registration failed');
-      }
       await login(form.email, form.password);
       if (form.role === 'Citizen') router.push('/citizen');
       else if (form.role === 'Government Officer') router.push('/government');
