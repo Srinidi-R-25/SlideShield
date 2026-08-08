@@ -1,6 +1,5 @@
 function getApiBase(): string {
-  let envUrl = process.env.NEXT_PUBLIC_API_URL;
-  if (!envUrl) return '/api';
+  let envUrl = process.env.NEXT_PUBLIC_API_URL || 'https://slideshield-backend.onrender.com/api';
   envUrl = envUrl.replace(/\/+$/, '');
   if (!envUrl.endsWith('/api')) {
     envUrl += '/api';
