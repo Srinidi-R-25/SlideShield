@@ -1,4 +1,14 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || '/api';
+function getApiBase(): string {
+  let envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!envUrl) return '/api';
+  envUrl = envUrl.replace(/\/+$/, '');
+  if (!envUrl.endsWith('/api')) {
+    envUrl += '/api';
+  }
+  return envUrl;
+}
+
+const API_BASE = getApiBase();
 
 export async function fetchApi<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const token = typeof window !== 'undefined' ? localStorage.getItem('slideshield_token') : null;
